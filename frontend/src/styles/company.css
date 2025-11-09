@@ -1,0 +1,104 @@
+:root{
+  /* Brand palette (IMPORTANT) */
+  --primary:#1A55E3;   /* blue */
+  --accent:#FF0854;    /* pink/red */
+  --green:#00D284;     /* success */
+  --info:#0DCAF0;      /* light blue */
+  --purple:#5E6EED;    /* accent purple */
+
+  /* Layout sizes */
+  --topbar-h:60px;
+  --sidebar-w:20vw;               /* 20% split */
+  --sidebar-w-min:232px;          /* do not shrink too small */
+  --sidebar-w-max:340px;
+  --sidebar-w-collapsed:76px;
+
+  --radius-2:16px;
+  --border:#e9edf5;
+}
+
+/* ===== Shell ===== */
+.company-shell{ background:#f7f9fc; min-height:100vh; }
+
+/* Sidebar (fixed) */
+.company-sidebar{
+  position:fixed; inset:0 auto 0 0; z-index:60;
+  width:clamp(var(--sidebar-w-min), var(--sidebar-w), var(--sidebar-w-max));
+  background:#ffffff; border-right:1px solid var(--border);
+  display:flex; flex-direction:column; transition:width .24s ease;
+}
+
+/* Topbar (fixed) */
+.company-topbar{
+  position:fixed; z-index:50; top:0; right:0;
+  left:clamp(var(--sidebar-w-min), var(--sidebar-w), var(--sidebar-w-max));
+  height:var(--topbar-h);
+  background:rgba(255,255,255,.9); border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px); transition:left .24s ease;
+}
+
+/* Main (only inner scroll) */
+.company-main{ margin-left:clamp(var(--sidebar-w-min), var(--sidebar-w), var(--sidebar-w-max)); transition:margin-left .24s ease; }
+.company-content{ height:100vh; padding:16px; padding-top:calc(var(--topbar-h) + 16px); overflow:hidden; }
+.company-scroll{ height:calc(100vh - var(--topbar-h) - 16px); overflow-y:auto; }
+
+/* Collapsed */
+.sidebar-collapsed .company-sidebar{ width:var(--sidebar-w-collapsed); }
+.sidebar-collapsed .company-topbar{ left:var(--sidebar-w-collapsed); }
+.sidebar-collapsed .company-main{ margin-left:var(--sidebar-w-collapsed); }
+.sidebar-collapsed .brand-name, .sidebar-collapsed .link-label{ display:none; }
+.sidebar-collapsed .nav-link{ justify-content:center; padding:.6rem; }
+.sidebar-collapsed .collapse-left{ display:none; }
+.sidebar-collapsed .collapse-right{ display:inline-block; }
+
+/* Mobile drawer */
+@media (max-width: 768px){
+  .company-sidebar{ transform:translateX(-100%); width:min(86vw, 320px); }
+  .sidebar-open .company-sidebar{ transform:translateX(0); box-shadow:0 24px 60px rgba(0,0,0,.28); }
+  .company-topbar{ left:0; }
+  .company-main{ margin-left:0; }
+  .sidebar-scrim{ display:none; }
+  .sidebar-open .sidebar-scrim{
+    display:block; position:fixed; inset:0; z-index:55; background:rgba(0,0,0,.45);
+  }
+}
+
+/* Common UI */
+.card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius-2); box-shadow:0 6px 16px rgba(16,24,40,.05); }
+.btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem .95rem; border-radius:12px; font-weight:600; cursor:pointer; }
+.btn-primary{ background:var(--primary); color:#fff; }
+.btn-dark{ background:#0f172a; color:#fff; }
+.btn-ghost{ background:#fff; border:1px solid var(--border); color:#0f172a; }
+a, button{ cursor:pointer; }
+input,select,textarea,button{ outline-color:var(--primary); }
+
+/* Nav */
+.nav-section-title{ font-size:11px; letter-spacing:.04em; color:#64748b; margin:10px 12px 6px; text-transform:uppercase; }
+.nav-link{
+  display:flex; align-items:center; gap:12px; padding:.65rem .7rem; margin:.15rem .35rem; border-radius:10px;
+  color:#0f172a; text-decoration:none; border:1px solid transparent; transition:background .18s, color .18s, border-color .18s;
+}
+.nav-link:hover{ background:#f0f4ff; border-color:#e6ebff; }
+.nav-active{
+  background:linear-gradient(0deg, #1A55E3, #2a63e8);
+  color:#fff !important; border-color:transparent;
+  box-shadow:0 10px 18px rgba(26,85,227,.22);
+}
+
+/* Avatar chip */
+.avatar{
+  height:32px; width:32px; border-radius:999px; display:grid; place-items:center; color:#fff;
+  background:linear-gradient(135deg, var(--primary), var(--purple));
+}
+
+/* Dropdown */
+.menu{
+  position:absolute; right:0; top:100%; margin-top:8px; width:220px;
+  background:#fff; border:1px solid var(--border); border-radius:12px;
+  box-shadow:0 16px 40px rgba(2,8,23,.14); padding:6px;
+}
+.menu-item{
+  display:flex; align-items:center; gap:10px; padding:.55rem .65rem; border-radius:10px; color:#0f172a; cursor:pointer;
+}
+.menu-item:hover{ background:#f8faff; }
+.menu-sep{ height:1px; background:var(--border); margin:6px 4px; }
