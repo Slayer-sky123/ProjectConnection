@@ -46,12 +46,12 @@ export default function Header() {
               key={item.path}
               to={item.path}
               className={`relative transition-colors ${
-                isActive(item.path) ? "text-[#024CAA]" : "hover:text-[#024CAA]"
+                isActive(item.path) ? "text-(--primary-blue)" : "hover:text-(--primary-blue)/80"
               }`}
             >
               {item.label}
               {isActive(item.path) && (
-                <span className="absolute -bottom-2 left-0 right-0 mx-auto h-[2px] w-6 rounded-full bg-[#024CAA]" />
+                <span className="absolute -bottom-2 left-0 right-0 mx-auto h-[2px] w-6 rounded-full bg-(--primary-orange)" />
               )}
             </Link>
           ))}
@@ -61,15 +61,13 @@ export default function Header() {
         <div className="hidden md:flex items-center justify-end gap-4">
           <Link
             to="/login"
-            className="text-[13px] md:text-sm font-semibold hover:text-[#024CAA] transition-colors"
-            style={{ color: "#091057" }}
+            className="text-[13px] md:text-sm font-semibold text-(--primary-blue) transition-colors"
           >
             Login
           </Link>
           <Link
             to="/register"
-            className="text-[13px] md:text-sm font-semibold px-4 py-2 rounded-lg shadow-md shadow-[#024CAA]/25 hover:shadow-lg hover:-translate-y-0.5 transition-all"
-            style={{ backgroundColor: "#024CAA", color: "white" }}
+            className="text-[13px] md:text-sm font-semibold px-4 py-2 rounded-lg bg-(--primary-blue) text-white"
           >
             Get Started
           </Link>

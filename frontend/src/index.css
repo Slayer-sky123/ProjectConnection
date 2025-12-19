@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+:root {
+    --primary-blue: #091057;
+    --primary-orange: #ec8305;
+    --soft-gray: #f7f8ff;
+    --gray: #6a7282;
+    --placeholder: #9AA0C2;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+}

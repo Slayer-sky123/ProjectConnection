@@ -198,43 +198,45 @@ export default function Home() {
       <Header />
 
       {/* spacer for fixed header */}
-      <div className="h-20 md:h-24" />
+      <div className="h-20 md:h-16" />
 
-      <main className="bg-[#F6F7FB] text-[#091057]">
+      <main className="bg-[#F6F7FB] text-white">
         {/* ========= HERO ========= */}
         <section className="py-10 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* Left: headline + desc + ctas + search */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E4EF] bg-[#F8F9FF] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-[#024CAA]">
+            <div className="space-y-6 md:space-y-4">
+              {/* <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E4EF] bg-[#F8F9FF] px-3 py-1 text-[11px] font-semibold capitalize tracking-[0.16em] text-[#024CAA]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#EC8305]" />
                 Careers that start with skills
-              </div>
+              </div> */}
 
-              <h1 className="text-[34px] leading-[1.15] md:text-[50px] md:leading-[1.08] font-extrabold tracking-tight text-[#091057]">
+              <h1 className="text-[34px] leading-[1.15] md:text-[50px] md:leading-tight font-bold capitalize tracking-tight text-(--primary-blue) relative">
+                <img className="size-10 object-contain absolute -top-[20%] right-[2%] rotate-45 z-0" src="/assets/smile.webp" alt="Smile" />
                 Turn student skills into{" "}
-                <span className="text-[#024CAA]">real job offers.</span>
+                <span className="text-(--primary-orange)">real job offers.
+                </span>
               </h1>
 
-              <p className="text-[15px] md:text-[16px] text-[#091057]/75 max-w-xl leading-relaxed">
+              <p className="text-[15px] md:text-lg text-(--primary-blue) max-w-xl leading-relaxed">
                 Sproutyou connects students, universities and hiring teams on one
                 outcome-first platform — from learning and projects to interviews
                 and offers.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-5">
                 <Link
                   to="/register"
-                  className="px-6 py-3 rounded-xl font-semibold text-white inline-flex items-center justify-center text-sm md:text-[15px] shadow-md shadow-[#024CAA]/30 hover:-translate-y-0.5 transition-transform"
-                  style={{ backgroundColor: "#024CAA" }}
+                  className="px-5 py-2.5 text-base font-medium rounded-lg bg-(--primary-blue) select-none inline-flex justify-center items-center gap-2 will-change-transform transition-all duration-150 hover:scale-95 active:scale-95"
                 >
                   Get Started
                 </Link>
                 <Link
                   to="/about"
-                  className="text-sm md:text-[15px] font-semibold text-[#024CAA] hover:underline"
+                  className="text-base font-medium text-(--primary-blue) capitalize flex justify-center items-center gap-1 transition-all duration-150 hover:underline"
                 >
-                  How Sproutyou works →
+                  How we works
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-5 lucide lucide-arrow-up-right-icon lucide-arrow-up-right"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
                 </Link>
               </div>
 
@@ -242,30 +244,47 @@ export default function Home() {
               <form
                 ref={formRef}
                 onSubmit={doSearchSubmit}
-                className="pt-2"
+                className="mt-8"
                 aria-label="Job search"
               >
-                <div className="rounded-2xl bg-white border border-[#E2E4EE] shadow-[0_14px_40px_rgba(9,16,87,0.06)] p-3 space-y-2">
-                  <div className="grid grid-cols-1 md:grid-cols-[2.2fr_1.1fr_1.1fr] gap-2">
-                    <div className="flex items-center gap-2 bg-[#F7F8FF] rounded-xl px-3">
-                      <span className="text-xs md:text-sm opacity-70">🔍</span>
+                {/* The main form container is now more prominent with a soft shadow */}
+                <div className="bg-white p-6 rounded-2xl border-2 border-dashed border-(--primary-blue)/20">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    {/* 1. Job Role/Skill Input - col-span-8 for desktop */}
+                    <div className="md:col-span-8 flex items-center gap-2 bg-(--soft-gray) text-(--gray) rounded-xl px-4 py-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="size-5"
+                      >
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                      </svg>
                       <input
                         value={kw}
                         onChange={(e) => setKw(e.target.value)}
+                        required
                         placeholder={
-                          typed
-                            ? `Search roles like "${typed}…"`
-                            : "Search by skill, role or company"
+                          typed ? `Search roles like "${typed}…"` : "Search roles like Product Designer..."
                         }
-                        className="h-11 w-full bg-transparent text-[14px] md:text-[15px] focus:outline-none placeholder:text-[#9AA0C2]"
+                        className="h-12 w-full bg-transparent text-sm focus:outline-none placeholder:text-(--placeholder)"
                       />
                     </div>
 
-                    <div className="flex items-center bg-[#F7F8FF] rounded-xl px-3">
+                    {/* 2. Experience Dropdown - col-span-4 for desktop */}
+                    <div className="md:col-span-4 relative flex items-center bg-(--soft-gray) text-(--gray) rounded-xl px-4 py-0">
                       <select
                         value={exp}
                         onChange={(e) => setExp(e.target.value)}
-                        className="h-11 w-full bg-transparent text-[14px] md:text-[15px] focus:outline-none border-0"
+                        required
+                        className="appearance-none h-12 w-full bg-transparent text-sm capitalize focus:outline-none border-0 pr-6 cursor-pointer"
                       >
                         <option value="">Experience</option>
                         <option value="fresher">Fresher</option>
@@ -275,14 +294,30 @@ export default function Home() {
                         <option value="4">4 years</option>
                         <option value="5">5+ years</option>
                       </select>
+                      {/* Custom dropdown arrow for better visual consistency */}
+                      <svg
+                        className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 text-(--placeholder)"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
                     </div>
 
-                    <div className="relative flex items-center bg-[#F7F8FF] rounded-xl px-3">
+                    {/* Second Row for Location and Button */}
+                    {/* 3. Location Input - col-span-8 for desktop */}
+                    <div className="md:col-span-8 relative flex items-center bg-(--soft-gray) text-(--gray) rounded-xl px-4 py-0">
                       <input
                         value={loc}
                         onChange={(e) => setLoc(e.target.value)}
+                        required
                         placeholder="Location"
-                        className="h-11 w-full bg-transparent text-[14px] md:text-[15px] focus:outline-none placeholder:text-[#9AA0C2]"
+                        className="h-12 w-full bg-transparent text-sm focus:outline-none placeholder:text-(--placeholder)"
                       />
                       <SearchDropdown
                         open={openDD && searchResults.length > 0}
@@ -295,86 +330,115 @@ export default function Home() {
                         }}
                       />
                     </div>
+
+                    {/* 4. Search Button - col-span-4 for desktop */}
+                    <div className="md:col-span-4 flex items-center">
+                      <button
+                        type="submit"
+                        className="w-full capitalize px-5 py-2.5 text-base font-normal rounded-lg bg-(--primary-blue) select-none inline-flex justify-center items-center gap-2 will-change-transform transition-all duration-150 hover:scale-95 active:scale-95"
+                      >
+                        {/* Using a check icon (similar to the image) for a more professional touch */}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="size-5"
+                        >
+                          <path d="m21 21-4.34-4.34" />
+                          <circle cx="11" cy="11" r="8" />
+                        </svg>
+                        Search jobs
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-2 px-1">
-                    <p className="text-[11px] text-[#091057]/55">
-                      Start typing a role or company name. Use filters to narrow down.
-                    </p>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center gap-1 text-[11px] font-semibold px-3 py-1.5 rounded-full bg-[#024CAA] text-white hover:bg-[#013b84] transition-colors"
-                    >
-                      Search jobs
-                      <span>↵</span>
-                    </button>
-                  </div>
+                  {/* Footer Text for Narrowing Down */}
+                  <p className="text-xs font-normal text-(--primary-blue)/45 capitalize mt-4 px-1">
+                    Start typing a role or company name. Use filters to narrow down.
+                  </p>
                 </div>
               </form>
             </div>
 
             {/* Right: illustration */}
             <div className="relative flex justify-center md:justify-end">
-              <div className="absolute inset-0 blur-3xl opacity-50 bg-[radial-gradient(circle_at_top,_rgba(2,76,170,0.20),_transparent_60%)] pointer-events-none" />
               <img
-                src="/assets/undraw_job-hunt_5umi.svg"
+                src="/assets/hero-banner.webp"
                 alt="Talent working on laptop"
-                className="relative z-[1] rounded-3xl border bg-white"
-                style={{
-                  width: "min(380px, 85vw)",
-                  borderColor: "#DBD3D3",
-                  boxShadow: "0 18px 50px rgba(9,16,87,0.22)",
-                }}
+                className="aspect-square w-[85%] object-contain"
               />
             </div>
           </div>
         </section>
 
         {/* ========= HOW WE WORK ========= */}
-        <section className="py-12 md:py-16 bg-[#F6F7FB]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <p className="text-xs uppercase tracking-[0.18em] text-[#091057]/55">
-                FROM LEARNING TO OFFER LETTER
-              </p>
-              <h2 className="mt-2 text-2xl md:text-[28px] font-extrabold text-[#091057]">
-                A simple journey that keeps everyone aligned.
-              </h2>
-              <p className="mt-3 text-[14px] md:text-[15px] text-[#091057]/75">
-                Students build skills, universities validate, and companies hire with confidence —
-                all inside one clean workflow.
-              </p>
-            </div>
+        <section className="p-5 bg-white">
+          <div className="py-12 md:py-16 bg-(--primary-blue) rounded-4xl relative overflow-hidden">
+            <img className="opacity-45 object-center object-cover absolute inset-0 z-0 w-full" src="/assets/grid.webp" alt="Grid Lines" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center max-w-3xl mx-auto">
+                <p className="text-sm capitalize text-white">
+                  From Learning To Offer Letter
+                </p>
+                <h2 className="mt-4 text-2xl md:text-4xl font-bold text-(--primary-orange) capitalize relative">
+                  <img className="absolute -top-[28%] left-[5%] z-0 size-8 object-contain select-none invert" src="/assets/wink.webp" alt="wink" />
+                  A simple journey that keeps everyone aligned.
+                </h2>
+                <p className="max-w-xl mx-auto mt-5 text-[14px] md:text-lg capitalize text-white">
+                  Students build skills, universities validate, and companies hire with confidence —
+                  all inside one clean workflow.
+                </p>
+              </div>
 
-            <div className="mt-10 grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "1. Map your path",
-                  desc: "Pick your goal. We break it into skills, projects, and milestones matched to real job descriptions.",
-                  icon: "📍",
-                },
-                {
-                  title: "2. Build & verify",
-                  desc: "Complete guided projects and assessments. Universities & mentors validate your progress and badges.",
-                  icon: "📚",
-                },
-                {
-                  title: "3. Match & apply",
-                  desc: "Your profile is matched with relevant roles. Companies see real work instead of just marksheets.",
-                  icon: "💼",
-                },
-              ].map((s) => (
-                <div
-                  key={s.title}
-                  className="rounded-2xl bg-white border border-[#E4E6F4] p-5 md:p-6 shadow-[0_14px_40px_rgba(15,23,42,0.05)]"
-                >
-                  <div className="h-10 w-10 flex items-center justify-center rounded-xl text-lg mb-3 bg-[#024CAA] text-white">
-                    {s.icon}
+              <div className="mt-10 grid md:grid-cols-3 gap-6">
+                {[
+                  {
+                    title: "1. Map your path",
+                    desc: "Pick your goal. We break it into skills, projects, and milestones matched to real job descriptions.",
+                    icon: (
+                      <svg className="size-6" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.5.5 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.5.5 0 0 0-.196 0zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    title: "2. Build & verify",
+                    desc: "Complete guided projects and assessments. Universities & mentors validate your progress and badges.",
+                    icon: (
+                      <svg className="size-6" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-buildings-fill" viewBox="0 0 16 16">
+                        <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zM2 11h1v1H2zm2 0h1v1H4zm-1 2v1H2v-1zm1 0h1v1H4zm9-10v1h-1V3zM8 5h1v1H8zm1 2v1H8V7zM8 9h1v1H8zm2 0h1v1h-1zm-1 2v1H8v-1zm1 0h1v1h-1zm3-2v1h-1V9zm-1 2h1v1h-1zm-2-4h1v1h-1zm3 0v1h-1V7zm-2-2v1h-1V5zm1 0h1v1h-1z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    title: "3. Match & apply",
+                    desc: "Your profile is matched with relevant roles. Companies see real work instead of just marksheets.",
+                    icon: (
+                      <svg className="size-6" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1z" />
+                        <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
+                      </svg>
+                    )
+                  }
+                ].map((s) => (
+                  <div
+                    key={s.title}
+                    className="rounded-2xl bg-white border border-[#E4E6F4] p-5 md:p-6 shadow-sm"
+                  >
+                    <div className="size-14 flex items-center justify-center rounded-xl text-white mb-3 bg-(--primary-blue)">
+                      {s.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold text-(--primary-blue)">{s.title}</h3>
+                    <p className="mt-2 leading-6 text-sm font-medium text-(--primary-blue)/75">{s.desc}</p>
                   </div>
-                  <h3 className="text-[16px] font-semibold text-[#091057]">{s.title}</h3>
-                  <p className="mt-2 text-[14px] leading-7 text-[#091057]/75">{s.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -458,9 +522,8 @@ export default function Home() {
                     <button
                       key={i}
                       onClick={() => setIdx(i)}
-                      className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                        i === idx ? "bg-[#024CAA]" : "bg-[#D5DBF0]"
-                      }`}
+                      className={`h-2.5 w-2.5 rounded-full transition-colors ${i === idx ? "bg-[#024CAA]" : "bg-[#D5DBF0]"
+                        }`}
                       aria-label={`Go to page ${i + 1}`}
                     />
                   ))}
